@@ -302,14 +302,10 @@ function Jasmine2HTMLReporter(options) {
 
         if (spec.failedExpectations.length > 0 || spec.passedExpectations.length > 0 ){
             html += '<ul>';
-            _.each(spec.failedExpectations, function(expectation){
+            _.each(spec.allExpectations, function(expectation){
                 html += '<li>';
-                html += expectation.message + '<span style="padding:0 1em;color:red;">&#10007;</span>';
-                html += '</li>';
-            });
-            _.each(spec.passedExpectations, function(expectation){
-                html += '<li>';
-                html += expectation.message + '<span style="padding:0 1em;color:green;">&#10003;</span>';
+                if(expectation.passed){html += expectation.message + '<span style="padding:0 1em;color:green;">&#10003;</span>';}
+                else{html += expectation.message + '<span style="padding:0 1em;color:red;">&#10007;</span>';}
                 html += '</li>';
             });
             html += '</ul></div>';
